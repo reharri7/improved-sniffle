@@ -36,7 +36,7 @@ if(process.env.NODE_ENV === 'production') {
     app.use(express.static(path.join(__dirname, 'client/build')));
 
     app.get('*', function(req, res) {
-        res.sendFile(path.join(__dirname, 'client/build', 'index.html'));
+        res.sendFile(path.join(__dirname, 'client/build', 'index.html'))
     });
 }
 
@@ -45,7 +45,8 @@ app.get('/:code', async (req, res) => {
     const query = await db.collection(urlCollection).where("code", "==", code);
     query.onSnapshot((data) => {
         if(data.empty) {
-            // return user to home
+            res.status(301).redirect('/');
+            console.log("Nothing was found");
             return
         }
         let url = data.docs[0].data().url;
@@ -54,9 +55,9 @@ app.get('/:code', async (req, res) => {
     });
 });
 
-app.post('/create', (req, res) => {
+// app.post('/create', (req, res) => {
 
-});
+// });
 
 app.listen(port, error => {
     if(error) throw error;
