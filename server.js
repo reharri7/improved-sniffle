@@ -28,7 +28,7 @@ const urlCollection = 'urls';
 const app = express();
 const port = process.env.PORT || 3001;
 
-app.set('view-engine', 'ejs');
+app.set('view engine', 'ejs');
 app.use(express.static(__dirname + '/public'));
 
 
