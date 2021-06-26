@@ -41,6 +41,10 @@ app.get('/', function(req, res) {
     res.render('index');
 });
 
+app.get('/stats', function(req, res) {
+    res.status(301).redirect('https://stats.uptimerobot.com/nJLL2sGoYY');
+});
+
 app.post('/create', async (req, res) => {
     try{
          urlWithProtocol  = req.body.url;
