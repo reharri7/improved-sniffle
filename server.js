@@ -41,12 +41,33 @@ app.get('/', function(req, res) {
     res.render('index');
 });
 
-app.get('/:code', async (req, res) => {
+app.post('/create', async (req, res) => {
+    try{
+         urlWithProtocol  = req.body.url;
+         var url = urlWithProtocol.replace(/^https?\:\/\//i, "");
+         code = nanoid(10);
+         console.log(`${ url } points to http://localhost:3001/to/${ code }`);
+         await db.collection(urlCollection).add({
+             "url": url,
+             "code": code,
+             "timesVisited": 0,
+             "dateCreated": new Date()
+         });
+         res.status(201).render('create', { code: code, url: url });
+
+    }
+    catch(err){
+        res.status(400);
+    }
+});
+
+app.get('/to/:code', async (req, res) => {
     const code = req.params.code;
     const query = await db.collection(urlCollection).where("code", "==", code);
 
     query.onSnapshot((data) => {
         if(data.empty) {
+            //TODO: Change this to  a 404 with a 404 page. "We couldn't find the page you were looking for"
             res.status(301).redirect('/');
             console.log("Nothing was found");
             return
@@ -56,25 +77,6 @@ app.get('/:code', async (req, res) => {
         
     });
     
-});
-
-app.post('/create', async (req, res) => {
-    try{
-         url  = req.body.url;
-         code = nanoid(10);
-         console.log(`${ url } points to http://localhost:3001/${ code }`);
-         await db.collection(urlCollection).add({
-             "url": url,
-             "code": code,
-             "timesVisited": 0,
-             "dateCreated": new Date()
-         });
-         res.status(201).send(`Your URL has been shortened to http://localhost:3001/${ code }`);
-
-    }
-    catch(err){
-        res.status(400);
-    }
 });
 
 app.listen(port, error => {
