@@ -1,9 +1,21 @@
 <!DOCTYPE html>
 <html>
     <head>
+    <meta charset="UTF-8">
+	<meta name="author" content="Rhett Harrison reharri7@asu.edu">
+    <link rel="icon" type="image/x-icon" href="/assets/link.svg" />
+	<rel="icon" type="image/png" href="/assets/link.svg" />
+	<link rel="icon" type="image/gif" href="/assets/link.svg" />
+	<title>Shorten a URL!</title>
 
+	<!-- CSS -->
+	<!-- load bootstrap and our own personal stylesheet -->
+	<link rel="stylesheet" href="/styles.css" type="text/css">
     </head>
     <body>
-        <div><a href="<%=url%>"><%=url%></a> has been shortened to <a href="https://tinyrhett.herokuapp.com/to/<%=code%>">https://tinyrhett.herokuapp.com/to/<%=code%></a></div>
+        <div class="container">
+            <h1>Congratulations!</h1>
+            <h2><a href="<%=url%>"><%=url%></a> has been shortened to <a href="https://tinyrhett.herokuapp.com/to/<%=code%>">https://tinyrhett.herokuapp.com/to/<%=code%></a></h2>
+        </div>
     </body>
 </html>

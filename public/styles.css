@@ -1,12 +1,21 @@
 html, body {
     width: 100%;
     margin: 0 auto;
+    text-align: center;
+    background-image:
+    linear-gradient(
+      45deg, 
+      red, #f06d06
+    );
+    background-repeat: no-repeat;
+    height: 100%;
 }
 
-.jumbotron h1{
-display: inline;
+.container {
+    width: 100%;
+    margin: 20px;
 }
 
-.jumbotron path {
-    display: inline;
+a {
+    text-decoration: none;
 }

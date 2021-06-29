@@ -71,9 +71,7 @@ app.get('/to/:code', async (req, res) => {
 
     query.onSnapshot((data) => {
         if(data.empty) {
-            //TODO: Change this to  a 404 with a 404 page. "We couldn't find the page you were looking for"
-            res.status(301).redirect('/');
-            console.log("Nothing was found");
+            res.status(404).render('404');
             return
         }
         let url = data.docs[0].data().url;
